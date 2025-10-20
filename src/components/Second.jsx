@@ -1,33 +1,41 @@
+import React, { useState } from "react";
 import "../styles/second.css";
 import Location from "./Location";
 import graduationcap from "../assets/f2dad4538338891d1595bf4caea1b361.png";
 
 const Second = () => {
+  const [loading, setLoading] = useState(false);
+
   function openMap() {
     if (!navigator.geolocation) {
       alert("Geolocation is not supported on this device.");
       return;
     }
 
-    // Show feedback immediately
-    alert("Fetching your location...");
+    setLoading(true); // show loading overlay
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        setLoading(false); // hide loading
         const userLat = position.coords.latitude;
         const userLng = position.coords.longitude;
 
-        // Your venue coordinates
         const venueLat = 51.4398439134538;
         const venueLng = -0.12563091237777593;
 
-        // Google Maps URL
         const url = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${venueLat},${venueLng}&travelmode=driving`;
 
-        // Open in new tab (mobile browsers sometimes block if not from a direct click)
-        window.location.href = url; // use location.href instead of window.open
+        // window.location.href = url;
+
+        // 🔥 Better mobile redirect
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.click();
       },
       (error) => {
+        setLoading(false); // hide loading even if error
         switch (error.code) {
           case error.PERMISSION_DENIED:
             alert("Please allow location access to open directions.");
@@ -44,14 +52,25 @@ const Second = () => {
       },
       {
         enableHighAccuracy: true,
-        timeout: 8000, // 8 seconds max
+        timeout: 15000,
         maximumAge: 0,
       }
     );
+    // ⏳ Safety timeout
+    setTimeout(() => {
+      setLoading(false);
+    }, 16000);
   }
 
   return (
     <div className="first-pagee">
+      {loading && (
+        <div className="loading-overlay">
+          <div className="spinner"></div>
+          <p>Locating you...</p>
+        </div>
+      )}
+
       <div className="pagee">
         <div>
           <div className="gradcap">
@@ -67,15 +86,15 @@ const Second = () => {
             />
             <div className="loca">
               <div className="prefix">Where</div>
-              <div>67 Streatham Hill,London SW2 4TX,United Kingdom</div>
+              <div>67 Streatham Hill, London SW2 4TX, United Kingdom</div>
               <button className="mapbutt" onClick={openMap}>
                 GOOGLE MAPS
               </button>
             </div>
             <Location
               pretext="Why"
-              reason="and a proud Gradute"
-              space="Music,Food, Good Times..."
+              reason="and a proud Graduate"
+              space="Music, Food, Good Times..."
             />
           </div>
         </div>
