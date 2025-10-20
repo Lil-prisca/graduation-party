@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+
+.loca {
+  height: 70px;
+  width: 250px;
+  background-image: url("../assets/449f659c6891cbeb1395188d6196e0ed.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* display: flex; */
+  position: relative;
+  align-items: center;
+  border-radius: 15px;
+  padding-top: 30px;
+  color: black;
+  margin-top: 30px;
+}
+.prefix {
+  position: absolute;
+  height: 30px;
+  width: 40%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-left: 25px;
+  /* padding-top: 5px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -15px;
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 25px;
+}
+.reason {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 25px;
+}
+button {
+  /* width: 80%; */
+  /* height: fit-content; */
+  /* padding: 5px 0; */
+  /* display: none; */
+}

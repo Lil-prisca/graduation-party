@@ -1,0 +1,65 @@
+.first-pa {
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("../assets/b8ab367e3b64015c5c26bbd979980944.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+}
+.pa {
+  margin: 0 auto;
+  width: 425px;
+  height: 100vh;
+  background-image: url("../assets/f5a376824ec640aa2e5fab4177677c98.png");
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+}
+
+.graducap {
+  display: flex;
+  width: 220px;
+  height: 220px;
+  /* background-color: blue; */
+  margin-bottom: -80px;
+  position: relative;
+  margin-left: 170px;
+}
+.graducap img {
+  width: 100%;
+  height: 100%;
+}
+.gradu-Text {
+  line-height: 160px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
+  position: relative;
+  font-size: 200px;
+  /* background-color: aqua; */
+  z-index: 2;
+}
+.google-form {
+  width: 160px;
+  height: 50px;
+  background-image: url("../assets/449f659c6891cbeb1395188d6196e0ed.jpg");
+  background-position: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  border-radius: 15px;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

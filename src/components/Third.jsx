@@ -1,0 +1,37 @@
+import "../styles/third.css";
+
+import graduationcap from "../assets/f2dad4538338891d1595bf4caea1b361.png";
+const Third = () => {
+  return (
+    <div className="first-pa">
+      <div className="pa">
+        <div>
+          <div className="graducap">
+            <img src={graduationcap} alt="" />
+          </div>
+          <div className="gradu-Text">
+            RS <br></br>VP
+          </div>
+          <div>
+            <p>Let us know by</p>
+            <p>JULY 15</p>
+            <p>So we can plan accordinly</p>
+          </div>
+          <a href="">
+            <button className="google-form">RSVP</button>
+          </a>
+          <div>
+            <p>
+              Please click te RSVP button and kindely fill <br></br>out thhe
+              form to confirm your attendance
+            </p>
+            <p>We cant wait to celebrate with you!</p>
+          </div>
+          <div>Thank You</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Third;
