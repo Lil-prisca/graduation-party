@@ -22,6 +22,23 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  transform: translateY(-100px);
+  animation: bgDropIn 2.5s ease-out forwards;
+}
+
+@keyframes bgDropIn {
+  0% {
+    /* opacity: 0; */
+    transform: translateY(-100px);
+  }
+  80% {
+    /* opacity: 0; */
+    transform: translateY(10px);
+  }
+  100% {
+    /* opacity: 1; */
+    transform: translateY(0px);
+  }
 }
 .text {
   height: 400px;
@@ -30,6 +47,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 2s;
+  opacity: 0;
 }
 .text img {
   /* z-index: 100; */
@@ -49,6 +69,11 @@
   display: flex;
   align-items: flex-start;
   height: fit-content;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 .invited {
   padding-top: 10px;
@@ -76,4 +101,42 @@
   /* background-color: red; */
   padding-bottom: 20px;
   border-bottom: 10px solid yellow;
+}
+.left-text {
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: slideLeft 1.5s ease-out forwards;
+  animation-delay: 1.5s; /* starts after image drops */
+  /* text-align: center; */
+}
+
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Text sliding from right */
+.right-text {
+  opacity: 0;
+  transform: translateX(100%);
+  animation: slideRight 1.5s ease-out forwards;
+  animation-delay: 1.7s; /* starts slightly after the left text */
+  /* text-align: center; */
+}
+
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

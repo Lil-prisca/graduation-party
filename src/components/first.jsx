@@ -12,8 +12,11 @@ const First = () => {
             <img src={she} alt="" />
             <p className="did-it"> DID IT</p>
             <div className="grad">
-              <p style={{ fontStyle: "italic" }}>
-                PROMISE IS GRADUATING FROM <br /> UNIVERSITY
+              <p className="right-text" style={{ fontStyle: "italic" }}>
+                PROMISE IS GRADUATING FROM
+              </p>
+              <p className="left-text" style={{ fontStyle: "italic" }}>
+                UNIVERSITY
               </p>
             </div>
             <div className="class">

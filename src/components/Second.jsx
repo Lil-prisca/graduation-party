@@ -3,30 +3,53 @@ import Location from "./Location";
 import graduationcap from "../assets/f2dad4538338891d1595bf4caea1b361.png";
 
 const Second = () => {
-  const handleOpenMap = () => {
+  function openMap() {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported on this device.");
+      return;
+    }
+
+    // Show feedback immediately
+    alert("Fetching your location...");
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const userLat = position.coords.latitude;
         const userLng = position.coords.longitude;
 
-        // Replace these with your venue’s coordinates
+        // Your venue coordinates
         const venueLat = 51.4398439134538;
         const venueLng = -0.12563091237777593;
 
-        // Create Google Maps directions URL
+        // Google Maps URL
         const url = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${venueLat},${venueLng}&travelmode=driving`;
 
-        window.open(url, "_blank");
+        // Open in new tab (mobile browsers sometimes block if not from a direct click)
+        window.location.href = url; // use location.href instead of window.open
       },
       (error) => {
-        console.error(error);
-        alert(
-          "Unable to retrieve your location. Please enable location services."
-        );
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            alert("Please allow location access to open directions.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            alert("Location unavailable. Try again or check GPS settings.");
+            break;
+          case error.TIMEOUT:
+            alert("Location request timed out. Try again.");
+            break;
+          default:
+            alert("Unable to get your location. Please try again later.");
+        }
       },
-      { enableHighAccuracy: true }
+      {
+        enableHighAccuracy: true,
+        timeout: 8000, // 8 seconds max
+        maximumAge: 0,
+      }
     );
-  };
+  }
+
   return (
     <div className="first-pagee">
       <div className="pagee">
@@ -45,7 +68,7 @@ const Second = () => {
             <div className="loca">
               <div className="prefix">Where</div>
               <div>67 Streatham Hill,London SW2 4TX,United Kingdom</div>
-              <button className="mapbutt" onClick={handleOpenMap}>
+              <button className="mapbutt" onclick={openMap}>
                 GOOGLE MAPS
               </button>
             </div>
