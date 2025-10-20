@@ -68,7 +68,7 @@ const Second = () => {
             <div className="loca">
               <div className="prefix">Where</div>
               <div>67 Streatham Hill,London SW2 4TX,United Kingdom</div>
-              <button className="mapbutt" onclick={openMap}>
+              <button className="mapbutt" onClick={openMap}>
                 GOOGLE MAPS
               </button>
             </div>
