@@ -1,46 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../styles/second.css";
 import Location from "./Location";
 import graduationcap from "../assets/f2dad4538338891d1595bf4caea1b361.png";
 
 const Second = () => {
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("Locating you...");
+  const locationWatchRef = useRef(null);
 
-  function openMap() {
-    const venueLat = 51.4398439134538;
-    const venueLng = -0.12563091237777593;
+  const venueLat = 51.4398439134538;
+  const venueLng = -0.12563091237777593;
 
+  const openInMaps = (userLat, userLng) => {
+    const url = userLat
+      ? `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${venueLat},${venueLng}&travelmode=driving`
+      : `https://www.google.com/maps/place/${venueLat},${venueLng}`;
+
+    // ✅ Use simulated link click (more mobile-safe than window.open)
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.click();
+  };
+
+  const openMap = () => {
     if (!navigator.geolocation) {
-      // ❌ No geolocation support – open fallback immediately
-      const fallbackUrl = `https://www.google.com/maps/place/${venueLat},${venueLng}`;
-      window.open(fallbackUrl, "_blank");
+      alert("Geolocation not supported. Opening venue...");
+      openInMaps();
       return;
     }
 
-    setLoading(true); // show loading overlay
+    setLoading(true);
+    setMessage("Getting your location...");
 
+    let gotLocation = false;
+
+    // ⏱ Safety timeout (15s): fallback to venue
+    const fallbackTimer = setTimeout(() => {
+      if (!gotLocation) {
+        setLoading(false);
+        alert("Taking too long — opening venue location instead.");
+        openInMaps();
+      }
+    }, 15000);
+
+    // 🎯 Fast first attempt (low accuracy, quick)
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setLoading(false); // hide loading
-        const userLat = position.coords.latitude;
-        const userLng = position.coords.longitude;
-
-        const url = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${venueLat},${venueLng}&travelmode=driving`;
-
-        // window.location.href = url;
-
-        // 🔥 Better mobile redirect
-        const a = document.createElement("a");
-        a.href = url;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.click();
+        gotLocation = true;
+        clearTimeout(fallbackTimer);
+        setLoading(false);
+        openInMaps(position.coords.latitude, position.coords.longitude);
       },
       (error) => {
-        setLoading(false); // hide loading even if error
+        console.warn("Fast location failed:", error);
+        // fallback to high-accuracy watch
+        setMessage("Trying more accurate location...");
+      },
+      { enableHighAccuracy: false, timeout: 3000, maximumAge: 60000 }
+    );
 
-        // 🎯 fallback to venue location if GPS fails
-        const fallbackUrl = `https://www.google.com/maps/place/${venueLat},${venueLng}`;
+    // 🎯 Backup: high-accuracy watch (more precise but slower)
+    locationWatchRef.current = navigator.geolocation.watchPosition(
+      (position) => {
+        if (gotLocation) return; // already handled
+        gotLocation = true;
+        clearTimeout(fallbackTimer);
+        setLoading(false);
+        navigator.geolocation.clearWatch(locationWatchRef.current);
+        openInMaps(position.coords.latitude, position.coords.longitude);
+      },
+      (error) => {
+        console.error("High accuracy failed:", error);
+        clearTimeout(fallbackTimer);
+        setLoading(false);
 
         switch (error.code) {
           case error.PERMISSION_DENIED:
@@ -53,43 +87,32 @@ const Second = () => {
             alert("Location request timed out. Try again.");
             break;
           default:
-            alert("Unable to get your location. Please try again later.");
+            alert("Unable to get your location. Opening venue instead.");
         }
-        window.open(fallbackUrl, "_blank");
+
+        openInMaps();
       },
-      {
-        enableHighAccuracy: true,
-        timeout: 15000,
-        maximumAge: 0,
-      }
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
     );
-    // ⏳ Safety timeout fallback
-    setTimeout(() => {
-      if (loading) {
-        setLoading(false);
-        const fallbackUrl = `https://www.google.com/maps/place/${venueLat},${venueLng}`;
-        alert("Taking too long. Opening venue location instead.");
-        window.open(fallbackUrl, "_blank");
-      }
-    }, 16000);
-  }
+  };
 
   return (
     <div className="first-pagee">
       {loading && (
         <div className="loading-overlay">
           <div className="spinner"></div>
-          <p>Locating you...</p>
+          <p>{message}</p>
         </div>
       )}
 
       <div className="pagee">
         <div>
           <div className="gradcap">
-            <img src={graduationcap} alt="" />
+            <img src={graduationcap} alt="Graduation cap" />
           </div>
           <div className="grad-Text">GRADUATION</div>
           <div className="grad-Textp">Party Details</div>
+
           <div className="dets">
             <Location
               pretext="When"
