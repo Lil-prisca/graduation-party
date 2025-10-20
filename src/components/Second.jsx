@@ -38,6 +38,10 @@ const Second = () => {
       },
       (error) => {
         setLoading(false); // hide loading even if error
+
+        // 🎯 fallback to venue location if GPS fails
+        const fallbackUrl = `https://www.google.com/maps/place/${venueLat},${venueLng}`;
+
         switch (error.code) {
           case error.PERMISSION_DENIED:
             alert("Please allow location access to open directions.");
@@ -51,6 +55,7 @@ const Second = () => {
           default:
             alert("Unable to get your location. Please try again later.");
         }
+        window.open(fallbackUrl, "_blank");
       },
       {
         enableHighAccuracy: true,
@@ -58,9 +63,14 @@ const Second = () => {
         maximumAge: 0,
       }
     );
-    // ⏳ Safety timeout
+    // ⏳ Safety timeout fallback
     setTimeout(() => {
-      setLoading(false);
+      if (loading) {
+        setLoading(false);
+        const fallbackUrl = `https://www.google.com/maps/place/${venueLat},${venueLng}`;
+        alert("Taking too long. Opening venue location instead.");
+        window.open(fallbackUrl, "_blank");
+      }
     }, 16000);
   }
 
