@@ -11,7 +11,6 @@ const Second = () => {
     const venueLng = -0.12563091237777593;
 
     if (!navigator.geolocation) {
-      alert("Geolocation is not supported on this device.");
       // ❌ No geolocation support – open fallback immediately
       const fallbackUrl = `https://www.google.com/maps/place/${venueLat},${venueLng}`;
       window.open(fallbackUrl, "_blank");
