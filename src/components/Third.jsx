@@ -17,7 +17,7 @@ const Third = () => {
             <p>JULY 15</p>
             <p>So we can plan accordinly</p>
           </div>
-          <a href="">
+          <a href=" https://forms.gle/ttNcPMeqAj96Gn968">
             <button className="google-form">RSVP</button>
           </a>
           <div>
