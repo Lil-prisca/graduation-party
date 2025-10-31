@@ -14,7 +14,8 @@ const Third = () => {
           </div>
           <div>
             <p>Let us know by</p>
-            <p>JULY 15</p>
+            <p>7TH OF JANUARY </p>
+            <p>DRESS CODE : </p>
             <p>So we can plan accordinly</p>
           </div>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfpUv8QXq7v0mZh8Pk8Q0E9plX3LI4K6iSnW-QFKgTGQjNC7w/viewform">
@@ -22,7 +23,7 @@ const Third = () => {
           </a>
           <div>
             <p>
-              Please click te RSVP button and kindely fill <br></br>out thhe
+              Please click the RSVP button and kindly fill <br></br>out thhe
               form to confirm your attendance
             </p>
             <p>We cant wait to celebrate with you!</p>
