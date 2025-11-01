@@ -23,7 +23,7 @@ const Third = () => {
 </a>
           <div>
             <p>
-              Please click te RSVP button and kindly fill <br></br>out the
+              Please click the RSVP button and kindly fill <br></br>out the
               form to confirm your attendance
             </p>
             <p>We cant wait to celebrate with you!</p>
