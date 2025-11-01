@@ -128,7 +128,7 @@ const Second = () => {
             </div>
             <Location
               pretext="Why"
-              reason="and a proud Graduate"
+              reason="and a Proud Graduate"
               space="Music, Food, Good Times..."
             />
           </div>
