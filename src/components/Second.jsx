@@ -117,7 +117,7 @@ const Second = () => {
             <Location
               pretext="When"
               reason="until the music stops"
-              space="JANUARY | 28 | 4PM"
+              space="JANUARY | 28 |3:30PM"
             />
             <div className="loca">
               <div className="prefix">Where</div>
