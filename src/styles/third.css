@@ -69,3 +69,13 @@
   font-family: "Montserrat", sans-serif;
   font-style: italic;
 }
+
+cp /c/Users/USER/images/Documents/personal-practice/graduate-rsvp/src/assets/* /c/path/to/your/repo/src/assets/ -f
+
+
+
+
+
+$localImages = "C:\Users\USER\Documents\personal-practice\graduate-rsvp\src\assets\*"
+$repoAssets = "C:\path\to\repo\src\assets"
+Copy-Item $localImages $repoAssets -Force
