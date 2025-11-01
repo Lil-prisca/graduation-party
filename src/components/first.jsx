@@ -16,7 +16,7 @@ const First = () => {
                 PROMISE IS GRADUATING FROM
               </p>
               <p className="left-text" style={{ fontStyle: "italic" }}>
-                UNIVERSITY OF ROEHAMPTON
+                UNIVERSITY
               </p>
             </div>
             <div className="class">
