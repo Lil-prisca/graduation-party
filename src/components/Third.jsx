@@ -14,7 +14,7 @@ const Third = () => {
           </div>
           <div>
             <p>Let us know by</p>
-            <p>7TH OF DECEMBER </p>
+            <p>10TH OF DECEMBER </p>
  <p>DRESS CODE : Elegant Winter Chic</p>
             <p>So we can plan accordinly</p>
           </div>
